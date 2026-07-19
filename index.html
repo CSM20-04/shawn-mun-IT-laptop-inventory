@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orbit Inventory</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section id="loginScreen" class="login-screen" aria-labelledby="loginTitle">
+      <form id="loginForm" class="login-card">
+        <div class="brand-lockup"><span>O</span><strong>Orbit Inventory</strong></div>
+        <p class="eyebrow">Secure company access</p>
+        <h1 id="loginTitle">Sign in to continue</h1>
+        <p>Use your authorised company account to access laptop and staff records.</p>
+        <label for="email">Company email</label>
+        <input id="email" type="email" value="it@orbit.local" autocomplete="username" required />
+        <label for="password">Password</label>
+        <input id="password" type="password" value="password" autocomplete="current-password" required />
+        <p id="loginError" class="form-error" hidden>Enter the demo account shown below to continue.</p>
+        <button class="primary-button" type="submit">Sign in securely</button>
+        <small>Demo access: <b>it@orbit.local</b> · <b>password</b></small>
+      </form>
+    </section>
+
+    <div id="app" class="app-shell" hidden>
+      <aside class="sidebar">
+        <a class="brand" href="#catalogue"><span class="brand-mark">O</span><span>Orbit<br><small>Inventory</small></span></a>
+        <nav aria-label="Main navigation">
+          <a class="nav-item active" href="#catalogue">Laptop catalogue</a>
+          <a class="nav-item" href="#staff">Staff checklist</a>
+          <a class="nav-item" href="#summary">Inventory summary</a>
+        </nav>
+        <div class="sidebar-footer"><span class="presence"></span> Signed in as IT manager<br><button id="signOut" class="text-button">Sign out</button></div>
+      </aside>
+      <main>
+        <header class="topbar"><div><p class="eyebrow">Laptop inventory management</p><h1>Source, assign and track laptops</h1></div><div class="secure-label">● Authorised session</div></header>
+
+        <section id="catalogue" class="panel catalogue-section" aria-labelledby="catalogueTitle">
+          <div class="panel-heading"><div><p class="eyebrow">Live inventory</p><h2 id="catalogueTitle">Find a laptop</h2></div><p id="resultCount" class="result-count" aria-live="polite"></p></div>
+          <div class="search-tools">
+            <label class="search-field" for="laptopSearch"><span aria-hidden="true">⌕</span><input id="laptopSearch" type="search" placeholder="Search model, specification or supplier" /></label>
+            <select id="brandFilter" aria-label="Filter by brand"><option value="all">All brands</option><option>Lenovo</option><option>Dell</option><option>HP</option></select>
+            <select id="availabilityFilter" aria-label="Filter by availability"><option value="all">Any availability</option><option value="Available">Available</option><option value="Limited">Limited</option><option value="Out of stock">Out of stock</option></select>
+            <select id="budgetFilter" aria-label="Filter by budget"><option value="all">Any budget</option><option value="1500">Up to S$1,500</option><option value="1800">Up to S$1,800</option><option value="2200">Up to S$2,200</option></select>
+            <button id="clearFilters" class="outline-button">Clear</button>
+          </div>
+          <div class="table-wrap"><table><thead><tr><th>Laptop</th><th>Configuration</th><th>Price</th><th>Availability</th><th>Stock</th><th></th></tr></thead><tbody id="laptopRows"></tbody></table></div>
+        </section>
+
+        <section id="staff" class="panel staff-section" aria-labelledby="staffTitle">
+          <div class="panel-heading"><div><p class="eyebrow">Issue checklist</p><h2 id="staffTitle">Staff laptop readiness</h2><p class="subcopy">Complete the checklist before assigning a laptop. All changes are saved on this browser.</p></div><div class="check-summary"><strong id="checkedCount">0</strong> / <span id="staffCount">0</span> complete</div></div>
+          <div class="staff-toolbar"><label class="search-field compact" for="staffSearch"><span aria-hidden="true">⌕</span><input id="staffSearch" type="search" placeholder="Find staff member or department" /></label><select id="departmentFilter" aria-label="Filter by department"><option value="all">All departments</option></select><label class="only-incomplete"><input id="incompleteFilter" type="checkbox" /> Show incomplete only</label></div>
+          <div id="staffList" class="staff-list" aria-live="polite"></div>
+        </section>
+
+        <section id="summary" class="summary-grid" aria-label="Inventory summary">
+          <article><span>Available laptops</span><strong>18</strong><small>6 ready to issue today</small></article><article><span>Staff checklist complete</span><strong id="summaryComplete">0%</strong><small>Across 120 staff members</small></article><article><span>Warranty actions due</span><strong>7</strong><small>Review within 90 days</small></article>
+        </section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
